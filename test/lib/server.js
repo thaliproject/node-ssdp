@@ -60,6 +60,24 @@ describe('Server', function () {
       done()
     })
 
+    it('handles ENOMEM when adding multicast membership', function (done) {
+      // Requires a longer timeout to exceed the time the retries take.
+      this.timeout(10 * 1000);
+      var socket = this.getFakeSocket();
+      socket.addMembership = function () {
+        var enomemError = new Error();
+        enomemError.code = 'ENOMEM';
+        throw enomemError;
+      };
+      var server = new Server(socket);
+
+      server.start(function (error) {
+        assert.equal(error.message, 'Too many addMembership attempts.');
+        done();
+      });
+      socket.emit('listening');
+    });
+
     it('starts advertising every n milliseconds', function (done) {
       var clock = this.sinon.useFakeTimers()
       var adInterval = 500 // to avoid all other advertise timers
