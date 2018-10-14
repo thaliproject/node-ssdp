@@ -61,7 +61,7 @@ There is another package called `ssdp` which is the original unmaintained versio
 
 Take a look at `example` directory as well to see examples or client and server.
 
-##Configuration
+## Configuration
 `new SSDP([options, [socket]])`
 
 SSDP constructor accepts an optional configuration object and an optional initialized socket. At the moment, the following is supported:
@@ -80,7 +80,7 @@ SSDP constructor accepts an optional configuration object and an optional initia
 - `ttl` _Number_ Packet TTL. Default: `1800`.
 - `allowWildcards` _Boolean_ Accept wildcards (`*`) in `serviceTypes` of `M-SEARCH` packets, e.g. `usn:Belkin:device:**`. Default: `false`
 
-###Logging
+### Logging
 Aside from `logLevel` configuration option you can set the level via an environment variable `LOG_LEVEL`, which overrides configuration.
 
 At log levels `DEBUG` and `TRACE` module will print call source location.
